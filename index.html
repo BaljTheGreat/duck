@@ -61,10 +61,10 @@
             
             // Basic URL formatting check
             if (urlInput.startsWith('http://') || urlInput.startsWith('https://') || urlInput.startsWith('file://')) {
-                iframe.src = urlInput;
+                iframe.src = '/proxy?url=' + urlInput;
             } else {
                 // Default to HTTP if no protocol is given
-                iframe.src = 'https://' + urlInput;
+                iframe.src = '/proxy?url=https://' + urlInput;
             }
         }
 
