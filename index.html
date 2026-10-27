@@ -56,8 +56,8 @@
 
     <script>
         function navigateToUrl() {
-            const urlInput = document.getElementById('address-bar').value;
-            const iframe = document.getElementById('browser-frame');
+            var urlInput = document.getElementById('address-bar').value;
+            var iframe = document.getElementById('browser-frame');
             
             // Basic URL formatting check
             if (urlInput.startsWith('http://') || urlInput.startsWith('https://') || urlInput.startsWith('file://')) {
