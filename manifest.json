@@ -1,0 +1,9 @@
+{
+  "name": "NOVA",
+  "short_name": "NO",
+  "id": "/your-repo-name/",
+  "start_url": "/duck",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#0078d4"
+}
