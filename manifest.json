@@ -2,7 +2,7 @@
   "id": "./",
   "name": "NOVA",
   "short_name": "NOVA",
-  "start_url": "./",
+  "start_url": "./duck/",
   "scope": "./",
   "display": "standalone",
   "background_color": "#ffffff",
