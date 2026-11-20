@@ -46,35 +46,38 @@
     </style>
 </head>
 <body>
-
-    <div id="#nav-bar">
-        <input type="text" id="address-bar" placeholder="Enter URL (e.g., https://example.com) or local file path..." />
-        <button onclick="navigateToUrl()">Go</button>
+    <div id="nav-bar">
+        <input type="text" id="address-bar" placeholder="Enter a URL (e.g. https://example.com)" />
+        <button type="button" id="go-button">Go</button>
     </div>
 
-    <iframe id="browser-frame" src="about:blank"></iframe>
+    <iframe id="browser-frame" src="about:blank" title="Browser content"></iframe>
 
     <script>
+        const addressBar = document.getElementById('address-bar');
+        const browserFrame = document.getElementById('browser-frame');
+
         function navigateToUrl() {
-            var urlInput = document.getElementById('address-bar').value;
-            var iframe = document.getElementById('browser-frame');
-            
-            // Basic URL formatting check
-            if (urlInput.startsWith('http://') || urlInput.startsWith('https://') || urlInput.startsWith('file://')) {
-                iframe.src = '/proxy?url=' + urlInput;
-            } else {
-                // Default to HTTP if no protocol is given
-                iframe.src = '/proxy?url=https://' + urlInput;
+            const value = addressBar.value.trim();
+            if (!value) return;
+
+            let url = value;
+            if (!/^https?:\/\//i.test(url)) {
+                url = 'https://' + url;
+            }
+
+            try {
+                url = new URL(url).href;
+                browserFrame.src = '/proxy?url=' + encodeURIComponent(url);
+            } catch (error) {
+                alert('Please enter a valid URL.');
             }
         }
 
-        // Allow pressing "Enter" to navigate
-        document.getElementById('address-bar').addEventListener('keypress', function (e) {
-            if (e.key === 'Enter') {
-                navigateToUrl();
-            }
+        document.getElementById('go-button').addEventListener('click', navigateToUrl);
+        addressBar.addEventListener('keydown', function (event) {
+            if (event.key === 'Enter') navigateToUrl();
         });
     </script>
-
 </body>
 </html>
